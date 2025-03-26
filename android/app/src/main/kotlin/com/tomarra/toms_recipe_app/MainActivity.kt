@@ -1,4 +1,4 @@
-package com.example.toms_recipe_app
+package com.tomarra.toms_recipe_app
 
 import io.flutter.embedding.android.FlutterActivity
 
