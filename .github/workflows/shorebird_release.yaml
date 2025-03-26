@@ -33,6 +33,7 @@ jobs:
         uses: shorebirdtech/shorebird-release@v0
         with:
           platform: android
+          args: --build-number=${{ github.run_number }}
 
   create_ios_release:
     runs-on: macos-latest
@@ -49,6 +50,7 @@ jobs:
         uses: shorebirdtech/shorebird-release@v0
         with:
           platform: ios
+          args: --build-number=${{ github.run_number }}
 
   create_macos_release:
     runs-on: macos-latest
@@ -65,6 +67,7 @@ jobs:
         uses: shorebirdtech/shorebird-release@v0
         with:
           platform: macos
+          args: --build-number=${{ github.run_number }}
 
   create_windows_release:
     runs-on: windows-latest
@@ -81,6 +84,7 @@ jobs:
         uses: shorebirdtech/shorebird-release@v0
         with:
           platform: windows
+          args: --build-number=${{ github.run_number }}
 
   create_linux_release:
     runs-on: ubuntu-latest
@@ -97,3 +101,4 @@ jobs:
         uses: shorebirdtech/shorebird-release@v0
         with:
           platform: linux
+          args: --build-number=${{ github.run_number }}
