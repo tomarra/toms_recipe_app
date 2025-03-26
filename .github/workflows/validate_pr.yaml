@@ -1,0 +1,56 @@
+name: "Validate PR"
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  valdiate_pr_title:
+    name: Validate PR Title
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            fix
+            feat
+            docs
+            refactor
+            test
+            ci
+            chore
+            revert
+          requireScope: false
+  validate_code:
+    name: Validate Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2.18.0
+        with:
+          flutter-version: "3.29.2"
+          channel: "stable"
+      - name: Get Flutter Packages
+        run: flutter pub get
+      - name: Check Formatting
+        run: dart format --set-exit-if-changed lib test
+      - name: Analyze
+        run: flutter analyze
+      - name: Build
+        run: flutter build web -t lib/main.dart
+  validate_spelling:
+    name: Validate Spelling
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Check Spelling
+        uses: streetsidesoftware/cspell-action@v6
+        with:
+          files: "**/*.{md,dart}"
+          config: .github/cspell.json
