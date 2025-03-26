@@ -1,9 +1,11 @@
 name: Shorebird Release
 
 on:
-  push:
-    tags:
-      - "*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Tag to Deploy
+        required: true
 
 env:
   SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
@@ -16,7 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 📚 Git Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.version }}
 
       - name: 🐦 Setup Shorebird
         uses: shorebirdtech/setup-shorebird@v1
@@ -39,7 +43,9 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: 📚 Git Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.version }}
 
       - name: 🐦 Setup Shorebird
         uses: shorebirdtech/setup-shorebird@v1
@@ -56,7 +62,9 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: 📚 Git Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.version }}
 
       - name: 🐦 Setup Shorebird
         uses: shorebirdtech/setup-shorebird@v1
@@ -73,7 +81,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: 📚 Git Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.version }}
 
       - name: 🐦 Setup Shorebird
         uses: shorebirdtech/setup-shorebird@v1
@@ -90,7 +100,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 📚 Git Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.version }}
 
       - name: 🐦 Setup Shorebird
         uses: shorebirdtech/setup-shorebird@v1
