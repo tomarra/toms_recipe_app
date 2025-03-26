@@ -12,6 +12,7 @@ env:
 
 jobs:
   create_android_release:
+    name: Create Android Release
     defaults:
       run:
         shell: bash
@@ -40,6 +41,7 @@ jobs:
           args: --build-number=${{ github.run_number }}
 
   create_ios_release:
+    name: Create iOS Release
     runs-on: macos-latest
     steps:
       - name: 📚 Git Checkout
@@ -59,6 +61,7 @@ jobs:
           args: --build-number=${{ github.run_number }}
 
   create_macos_release:
+    name: Create MacOS Release
     runs-on: macos-latest
     steps:
       - name: 📚 Git Checkout
@@ -78,6 +81,7 @@ jobs:
           args: --build-number=${{ github.run_number }}
 
   create_windows_release:
+    name: Create Windows Release
     runs-on: windows-latest
     steps:
       - name: 📚 Git Checkout
@@ -97,12 +101,18 @@ jobs:
           args: --build-number=${{ github.run_number }}
 
   create_linux_release:
+    name: Create Linux Release
     runs-on: ubuntu-latest
     steps:
       - name: 📚 Git Checkout
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.version }}
+
+      - name: 💻 Linux Setup
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ninja-build libgtk-3-dev
 
       - name: 🐦 Setup Shorebird
         uses: shorebirdtech/setup-shorebird@v1
