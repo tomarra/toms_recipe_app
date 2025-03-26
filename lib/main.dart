@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -12,20 +12,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Recipes App',
       theme: ThemeData(colorSchemeSeed: Colors.lightGreen, useMaterial3: true),
-      home: RecipeListPage(),
+      home: const RecipeListPage(),
     );
   }
 }
 
 // Model for a Recipe
 class Recipe {
-  final int id;
-  final String title;
-  final String imageUrl;
-  final String cookingTime;
-  final List<String> ingredients;
-  final List<String> steps;
-
   Recipe({
     required this.id,
     required this.title,
@@ -34,6 +27,12 @@ class Recipe {
     required this.ingredients,
     required this.steps,
   });
+  final int id;
+  final String title;
+  final String imageUrl;
+  final String cookingTime;
+  final List<String> ingredients;
+  final List<String> steps;
 }
 
 // Main Page that displays a list of recipes
@@ -114,12 +113,12 @@ class RecipeListPageState extends State<RecipeListPage> {
   void _navigateToSettings() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SettingsPage()),
+      MaterialPageRoute<void>(builder: (context) => const SettingsPage()),
     );
   }
 
   // Navigate to the create recipe page
-  void _navigateToCreateRecipe() async {
+  Future<void> _navigateToCreateRecipe() async {
     final newRecipe = await Navigator.push<Recipe>(
       context,
       MaterialPageRoute(
@@ -137,13 +136,13 @@ class RecipeListPageState extends State<RecipeListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Recipes')),
+      appBar: AppBar(title: const Text('Recipes')),
       drawer: Drawer(
         child: ListView(
           children: [
-            DrawerHeader(child: Text('Menu')),
+            const DrawerHeader(child: Text('Menu')),
             ListTile(
-              title: Text('Settings'),
+              title: const Text('Settings'),
               onTap: () {
                 Navigator.pop(context);
                 _navigateToSettings();
@@ -173,7 +172,7 @@ class RecipeListPageState extends State<RecipeListPage> {
                   builder: (context) => RecipeDetailsPage(recipe: recipe),
                 ),
               );
-              if (result == true) {
+              if (result!) {
                 _deleteRecipe(recipe);
               }
             },
@@ -182,7 +181,7 @@ class RecipeListPageState extends State<RecipeListPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _navigateToCreateRecipe,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -190,9 +189,8 @@ class RecipeListPageState extends State<RecipeListPage> {
 
 // Page to display the details of a recipe
 class RecipeDetailsPage extends StatelessWidget {
+  const RecipeDetailsPage({required this.recipe, super.key});
   final Recipe recipe;
-
-  const RecipeDetailsPage({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
@@ -201,21 +199,21 @@ class RecipeDetailsPage extends StatelessWidget {
         title: Text(recipe.title),
         actions: [
           IconButton(
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
             onPressed: () {
               // Confirm deletion of the recipe
-              showDialog(
+              showDialog<void>(
                 context: context,
                 builder:
                     (context) => AlertDialog(
-                      title: Text('Delete Recipe'),
-                      content: Text(
+                      title: const Text('Delete Recipe'),
+                      content: const Text(
                         'Are you sure you want to delete this recipe?',
                       ),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: Text('Cancel'),
+                          child: const Text('Cancel'),
                         ),
                         TextButton(
                           onPressed: () {
@@ -225,7 +223,7 @@ class RecipeDetailsPage extends StatelessWidget {
                               true,
                             ); // Return deletion flag
                           },
-                          child: Text(
+                          child: const Text(
                             'Delete',
                             style: TextStyle(color: Colors.red),
                           ),
@@ -238,7 +236,7 @@ class RecipeDetailsPage extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -250,25 +248,25 @@ class RecipeDetailsPage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'Cooking Time: ${recipe.cookingTime}',
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Ingredients:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             ...recipe.ingredients.map((ingredient) => Text('- $ingredient')),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Steps:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             ...recipe.steps.asMap().entries.map((entry) {
-              int idx = entry.key + 1;
-              String step = entry.value;
+              final idx = entry.key + 1;
+              final step = entry.value;
               return Text('$idx. $step');
             }),
           ],
@@ -280,8 +278,8 @@ class RecipeDetailsPage extends StatelessWidget {
 
 // Page to create a new recipe
 class CreateRecipePage extends StatefulWidget {
+  const CreateRecipePage({required this.nextId, super.key});
   final int nextId;
-  const CreateRecipePage({super.key, required this.nextId});
 
   @override
   CreateRecipePageState createState() => CreateRecipePageState();
@@ -325,9 +323,9 @@ class CreateRecipePageState extends State<CreateRecipePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Create Recipe')),
+      appBar: AppBar(title: const Text('Create Recipe')),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
@@ -335,7 +333,7 @@ class CreateRecipePageState extends State<CreateRecipePage> {
               children: [
                 TextFormField(
                   controller: _titleController,
-                  decoration: InputDecoration(labelText: 'Title'),
+                  decoration: const InputDecoration(labelText: 'Title'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a title';
@@ -345,11 +343,11 @@ class CreateRecipePageState extends State<CreateRecipePage> {
                 ),
                 TextFormField(
                   controller: _imageUrlController,
-                  decoration: InputDecoration(labelText: 'Image URL'),
+                  decoration: const InputDecoration(labelText: 'Image URL'),
                 ),
                 TextFormField(
                   controller: _cookingTimeController,
-                  decoration: InputDecoration(labelText: 'Cooking Time'),
+                  decoration: const InputDecoration(labelText: 'Cooking Time'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter the cooking time';
@@ -359,7 +357,7 @@ class CreateRecipePageState extends State<CreateRecipePage> {
                 ),
                 TextFormField(
                   controller: _ingredientsController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Ingredients (one per line)',
                   ),
                   maxLines: null,
@@ -373,7 +371,7 @@ class CreateRecipePageState extends State<CreateRecipePage> {
                 ),
                 TextFormField(
                   controller: _stepsController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Steps (one per line)',
                   ),
                   maxLines: null,
@@ -385,10 +383,10 @@ class CreateRecipePageState extends State<CreateRecipePage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _submit,
-                  child: Text('Create Recipe'),
+                  child: const Text('Create Recipe'),
                 ),
               ],
             ),
@@ -406,8 +404,8 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Settings')),
-      body: Center(child: Text('Settings Page - Options go here')),
+      appBar: AppBar(title: const Text('Settings')),
+      body: const Center(child: Text('Settings Page - Options go here')),
     );
   }
 }
