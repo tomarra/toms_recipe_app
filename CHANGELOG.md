@@ -1,6 +1,8 @@
 Changelog
 
 
+### [1.1.2](https://github.com/tomarra/toms_recipe_app/compare/1.1.1...1.1.2) (2025-03-26)
+
 ### [1.1.1](https://github.com/tomarra/toms_recipe_app/compare/1.1.0...1.1.1) (2025-03-26)
 
 ## 1.1.0 (2025-03-26)
