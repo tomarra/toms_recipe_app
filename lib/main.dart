@@ -5,6 +5,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -36,11 +38,13 @@ class Recipe {
 
 // Main Page that displays a list of recipes
 class RecipeListPage extends StatefulWidget {
+  const RecipeListPage({super.key});
+
   @override
-  _RecipeListPageState createState() => _RecipeListPageState();
+  RecipeListPageState createState() => RecipeListPageState();
 }
 
-class _RecipeListPageState extends State<RecipeListPage> {
+class RecipeListPageState extends State<RecipeListPage> {
   List<Recipe> recipes = [];
   int _nextId = 1;
 
@@ -93,11 +97,11 @@ class _RecipeListPageState extends State<RecipeListPage> {
   }
 
   // Add a new recipe
-  void _addRecipe(Recipe recipe) {
+  /*void _addRecipe(Recipe recipe) {
     setState(() {
       recipes.add(recipe);
     });
-  }
+  }*/
 
   // Delete a recipe from the list
   void _deleteRecipe(Recipe recipe) {
@@ -177,8 +181,8 @@ class _RecipeListPageState extends State<RecipeListPage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
         onPressed: _navigateToCreateRecipe,
+        child: Icon(Icons.add),
       ),
     );
   }
@@ -188,7 +192,7 @@ class _RecipeListPageState extends State<RecipeListPage> {
 class RecipeDetailsPage extends StatelessWidget {
   final Recipe recipe;
 
-  RecipeDetailsPage({required this.recipe});
+  const RecipeDetailsPage({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
@@ -256,9 +260,7 @@ class RecipeDetailsPage extends StatelessWidget {
               'Ingredients:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            ...recipe.ingredients
-                .map((ingredient) => Text('- $ingredient'))
-                .toList(),
+            ...recipe.ingredients.map((ingredient) => Text('- $ingredient')),
             SizedBox(height: 16),
             Text(
               'Steps:',
@@ -268,7 +270,7 @@ class RecipeDetailsPage extends StatelessWidget {
               int idx = entry.key + 1;
               String step = entry.value;
               return Text('$idx. $step');
-            }).toList(),
+            }),
           ],
         ),
       ),
@@ -279,13 +281,13 @@ class RecipeDetailsPage extends StatelessWidget {
 // Page to create a new recipe
 class CreateRecipePage extends StatefulWidget {
   final int nextId;
-  CreateRecipePage({required this.nextId});
+  const CreateRecipePage({super.key, required this.nextId});
 
   @override
-  _CreateRecipePageState createState() => _CreateRecipePageState();
+  CreateRecipePageState createState() => CreateRecipePageState();
 }
 
-class _CreateRecipePageState extends State<CreateRecipePage> {
+class CreateRecipePageState extends State<CreateRecipePage> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _imageUrlController = TextEditingController();
@@ -399,6 +401,8 @@ class _CreateRecipePageState extends State<CreateRecipePage> {
 
 // Simple settings page
 class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
