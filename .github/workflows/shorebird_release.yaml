@@ -9,6 +9,7 @@ on:
 
 env:
   SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+  FLUTTER_VERSION: 3.29.2
 
 jobs:
   create_android_release:
@@ -37,6 +38,7 @@ jobs:
       - name: 🚀 Shorebird Release
         uses: shorebirdtech/shorebird-release@v1
         with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           platform: android
           args: --build-number=${{ github.run_number }}
 
@@ -72,6 +74,7 @@ jobs:
       - name: 🚀 Shorebird Release
         uses: shorebirdtech/shorebird-release@v1
         with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           platform: ios
           args: --build-number=${{ github.run_number }}
 
@@ -92,6 +95,7 @@ jobs:
       - name: 🚀 Shorebird Release
         uses: shorebirdtech/shorebird-release@v1
         with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           platform: macos
           args: --build-number=${{ github.run_number }}
 
@@ -112,6 +116,7 @@ jobs:
       - name: 🚀 Shorebird Release
         uses: shorebirdtech/shorebird-release@v1
         with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           platform: windows
           args: --build-number=${{ github.run_number }}
 
@@ -137,5 +142,6 @@ jobs:
       - name: 🚀 Shorebird Release
         uses: shorebirdtech/shorebird-release@v1
         with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           platform: linux
           args: --build-number=${{ github.run_number }}
