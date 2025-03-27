@@ -35,7 +35,7 @@ jobs:
           java-version: "17"
 
       - name: 🚀 Shorebird Release
-        uses: shorebirdtech/shorebird-release@v0
+        uses: shorebirdtech/shorebird-release@v1
         with:
           platform: android
           args: --build-number=${{ github.run_number }}
@@ -55,7 +55,7 @@ jobs:
           cache: true
 
       - name: 🚀 Shorebird Release
-        uses: shorebirdtech/shorebird-release@v0
+        uses: shorebirdtech/shorebird-release@v1
         with:
           platform: ios
           args: --build-number=${{ github.run_number }}
@@ -75,7 +75,7 @@ jobs:
           cache: true
 
       - name: 🚀 Shorebird Release
-        uses: shorebirdtech/shorebird-release@v0
+        uses: shorebirdtech/shorebird-release@v1
         with:
           platform: macos
           args: --build-number=${{ github.run_number }}
@@ -95,7 +95,7 @@ jobs:
           cache: true
 
       - name: 🚀 Shorebird Release
-        uses: shorebirdtech/shorebird-release@v0
+        uses: shorebirdtech/shorebird-release@v1
         with:
           platform: windows
           args: --build-number=${{ github.run_number }}
@@ -120,7 +120,7 @@ jobs:
           cache: true
 
       - name: 🚀 Shorebird Release
-        uses: shorebirdtech/shorebird-release@v0
+        uses: shorebirdtech/shorebird-release@v1
         with:
           platform: linux
           args: --build-number=${{ github.run_number }}
