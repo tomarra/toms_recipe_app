@@ -63,7 +63,7 @@ jobs:
           p12-password: ${{ secrets.APPSTORE_CERTIFICATES_PASSWORD }}
 
       - name: 🍏 Setup Apple Profiles
-        uses: Apple-Actions/download-provisioning-profiles@v1
+        uses: Apple-Actions/download-provisioning-profiles@v3
         with:
           bundle-id: com.tomarra.tomsRecipeApp
           profile-type: IOS_APP_STORE
