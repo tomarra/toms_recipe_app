@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Tom\'s Recipes App',
-      theme: ThemeData(colorSchemeSeed: Colors.lightGreen, useMaterial3: true),
+      theme: ThemeData(colorSchemeSeed: Colors.red, useMaterial3: true),
       home: const RecipeListPage(),
     );
   }
