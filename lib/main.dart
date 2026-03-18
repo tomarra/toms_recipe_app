@@ -206,35 +206,37 @@ class RecipeDetailsPage extends StatelessWidget {
             icon: const Icon(Icons.delete),
             onPressed: () {
               // Confirm deletion of the recipe
-              unawaited(showDialog<void>(
-                context: context,
-                builder:
-                    (context) => AlertDialog(
-                      title: const Text('Delete Recipe'),
-                      content: const Text(
-                        'Are you sure you want to delete this recipe?',
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text('Cancel'),
+              unawaited(
+                showDialog<void>(
+                  context: context,
+                  builder:
+                      (context) => AlertDialog(
+                        title: const Text('Delete Recipe'),
+                        content: const Text(
+                          'Are you sure you want to delete this recipe?',
                         ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context); // Close the dialog
-                            Navigator.pop(
-                              context,
-                              true,
-                            ); // Return deletion flag
-                          },
-                          child: const Text(
-                            'Delete',
-                            style: TextStyle(color: Colors.red),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('Cancel'),
                           ),
-                        ),
-                      ],
-                    ),
-              ));
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context); // Close the dialog
+                              Navigator.pop(
+                                context,
+                                true,
+                              ); // Return deletion flag
+                            },
+                            child: const Text(
+                              'Delete',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          ),
+                        ],
+                      ),
+                ),
+              );
             },
           ),
         ],
