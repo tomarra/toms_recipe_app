@@ -1,6 +1,13 @@
 Changelog
 
 
+### [1.3.1](https://github.com/tomarra/toms_recipe_app/compare/1.3.0...1.3.1) (2025-06-10)
+
+
+### Bug Fixes
+
+* update app title ([#20](https://github.com/tomarra/toms_recipe_app/issues/20)) ([db7a8a8](https://github.com/tomarra/toms_recipe_app/commit/db7a8a82e436e83e936d94828fe25187782fdcd4))
+
 ## [1.3.0](https://github.com/tomarra/toms_recipe_app/compare/1.2.3...1.3.0) (2025-05-27)
 
 
