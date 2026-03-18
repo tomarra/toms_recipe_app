@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -111,9 +113,11 @@ class RecipeListPageState extends State<RecipeListPage> {
 
   // Navigate to the settings page
   void _navigateToSettings() {
-    Navigator.push(
-      context,
-      MaterialPageRoute<void>(builder: (context) => const SettingsPage()),
+    unawaited(
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(builder: (context) => const SettingsPage()),
+      ),
     );
   }
 
@@ -202,7 +206,7 @@ class RecipeDetailsPage extends StatelessWidget {
             icon: const Icon(Icons.delete),
             onPressed: () {
               // Confirm deletion of the recipe
-              showDialog<void>(
+              unawaited(showDialog<void>(
                 context: context,
                 builder:
                     (context) => AlertDialog(
@@ -230,7 +234,7 @@ class RecipeDetailsPage extends StatelessWidget {
                         ),
                       ],
                     ),
-              );
+              ));
             },
           ),
         ],
